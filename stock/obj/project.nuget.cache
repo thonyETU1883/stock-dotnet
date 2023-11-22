@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "NdHrCOxx15foeXETCBbnQ5ialuDRoprp57uQBN10jkNoeSmQsKJZixBIyaUIbFuAFmrfwg3hB5HcH9kh+Ubx3g==",
+  "success": true,
+  "projectFilePath": "D:\\ratah\\c#\\stock-dotnet\\stock\\stock.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\thony\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\thony\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\thony\\.nuget\\packages\\npgsql\\8.0.0\\npgsql.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
