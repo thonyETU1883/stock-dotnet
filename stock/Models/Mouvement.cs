@@ -143,4 +143,87 @@ class Mouvement{
 
         return listemouvement;
     }
+
+    public bool controledate(NpgsqlConnection liaisonbase){
+        Article article = new Article();
+        article.getArticleById(this.getIdarticle(),liaisonbase);
+        Mouvement lastmouvement = article.getlastmouvement(liaisonbase,this.getIdmagasin());
+        if(this.getDate() < lastmouvement.getDate()){
+            return false;
+        }
+        return true;
+    }
+
+    public bool controlestock(NpgsqlConnection liaisonbase){
+        Article article = new Article();
+        article.getArticleById(this.getIdarticle(),liaisonbase);
+        Mouvement lastmouvement = article.getlastmouvement(liaisonbase,this.getIdmagasin());
+        if(this.getQuantite() > lastmouvement.getQuantite()){
+            return false;
+        }
+        return true;
+    }
+
+    public void changeetatsortie(NpgsqlConnection liaisonbase){
+        String sql = "UPDATE sortie SET etat = 1 WHERE idsortie = @idsortie";
+
+        if(liaisonbase == null || liaisonbase.State == ConnectionState.Closed){
+            Connexion connexion = new Connexion ();
+            liaisonbase = connexion.createLiaisonBase();
+            liaisonbase.Open();
+        }
+
+        try{
+            NpgsqlCommand cmd = new NpgsqlCommand(sql, liaisonbase);
+            cmd.Parameters.AddWithValue("@idsortie",this.getIdmouvement());
+            cmd.ExecuteNonQuery();
+            Console.WriteLine("update : "+this.getIdmouvement());
+        }catch(Exception e){
+            Console.WriteLine(e.Message);
+        }finally{
+            if(liaisonbase != null){
+                liaisonbase.Close();
+            }
+        }
+    } 
+
+    public void insertionmouvement(String idsortie,NpgsqlConnection liaisonbase){
+        String sql = "INSERT INTO mouvement(date,idsortie,identree,quantite) VALUES (@date,@idsortie,@identree,@quantite)";
+        
+        if(liaisonbase == null || liaisonbase.State == ConnectionState.Closed){
+            Connexion connexion = new Connexion ();
+            liaisonbase = connexion.createLiaisonBase();
+            liaisonbase.Open();
+        }
+
+        try{
+            NpgsqlCommand cmd = new NpgsqlCommand(sql, liaisonbase);
+            cmd.Parameters.AddWithValue("@date",this.getDate());
+            cmd.Parameters.AddWithValue("@idsortie",idsortie);
+            cmd.Parameters.AddWithValue("@identree",this.getIdmouvement());
+            cmd.Parameters.AddWithValue("@quantite",this.getQuantite());
+            cmd.ExecuteNonQuery();
+            Console.WriteLine("insertion mouvement terminer");
+        }catch(Exception e){
+            Console.WriteLine(e.Message);
+        }finally{
+            if(liaisonbase != null){
+                liaisonbase.Close();
+            }
+        }
+    }  
+
+    public void validationsortie(NpgsqlConnection liaisonbase){
+        if(this.controledate(liaisonbase) == false){
+            throw new Exceptionpersonnalise("date incorrecte");
+        }else if(this.controlestock() == false){
+            throw new Exceptionpersonnalise("quantite insuffusant");
+        }
+        this.changeetatsortie(liaisonbase);
+        List<Mouvement> listedecompose = this.decomposer(liaisonbase);
+        foreach(Mouvement mouvement in listedecompose){
+            mouvement.insertionmouvement(this.getIdmouvement(),liaisonbase);
+        }
+        Console.WriteLine("validation terminer");
+    }
 }

@@ -15,9 +15,8 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        Article article = new Article("vm","vary mena",1);
-        Mouvement mouvement = article.getlastmouvement(null,"magasin1");
-        Console.WriteLine(mouvement.getIdmouvement());
+        Mouvement mouvement = new Mouvement("entree1",DateTime.Parse("2023-11-22 12:30:00"),2,"vm","magasin1");
+        mouvement.insertionmouvement("sortie8",null);
         return View();
     }
 

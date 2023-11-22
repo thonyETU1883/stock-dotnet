@@ -33,3 +33,4 @@ D:\ratah\c#\stock-dotnet\stock\obj\Debug\net8.0\refint\stock.dll
 D:\ratah\c#\stock-dotnet\stock\obj\Debug\net8.0\stock.pdb
 D:\ratah\c#\stock-dotnet\stock\obj\Debug\net8.0\stock.genruntimeconfig.cache
 D:\ratah\c#\stock-dotnet\stock\obj\Debug\net8.0\ref\stock.dll
+D:\ratah\c#\stock-dotnet\stock\obj\Debug\net8.0\stock.sourcelink.json
