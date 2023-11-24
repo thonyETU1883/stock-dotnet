@@ -26,7 +26,8 @@ CREATE TABLE sortie(
     quantite DOUBLE PRECISION,
     idarticle VARCHAR(100),
     idmagasin VARCHAR(100),
-    etat INTEGER
+    etat INTEGER,
+    prixunitaire DOUBLE PRECISION
 );
 
 
@@ -36,6 +37,7 @@ CREATE TABLE entree (
     quantite DOUBLE PRECISION,
     idarticle VARCHAR(100),
     idmagasin VARCHAR(100),
+    prixunitaire DOUBLE PRECISION,
     FOREIGN KEY(idarticle) REFERENCES article(idarticle),
     FOREIGN KEY(idmagasin) REFERENCES magasin(idmagasin)
 );
@@ -50,5 +52,4 @@ CREATE TABLE mouvement (
     FOREIGN KEY(idsortie) REFERENCES sortie(idsortie),
     FOREIGN KEY(identree) REFERENCES entree(identree)
 );
-
 

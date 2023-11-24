@@ -15,9 +15,62 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        Mouvement mouvement = new Mouvement("entree1",DateTime.Parse("2023-11-22 12:30:00"),2,"vm","magasin1");
-        mouvement.insertionmouvement("sortie8",null);
         return View();
+    }
+
+    public IActionResult Versformulairesortie()
+    {
+        Magasin magasin = new Magasin();
+        ViewBag.listemagasin = magasin.getallmagasin(null);
+        return View("Sortieformulaire");
+    }
+
+    public IActionResult insertionsortie(String date,String idarticle,double quantite,double prixunitaire,String idmagasin)
+    {   
+        Mouvement mouvement = new Mouvement(DateTime.Parse(date),quantite,idarticle,idmagasin,prixunitaire);
+        mouvement.insertionsortie(null);
+        return View("Index");
+    }
+
+    public IActionResult Versvalidationsortie()
+    {
+        Mouvement mouvement = new Mouvement();
+        List<Mouvement> listemouvement = mouvement.getallmouvementnovalider(null); 
+        ViewBag.listemouvement = listemouvement;
+        return View("validationsortie");
+    }
+
+     public IActionResult validation(String idmouvement)
+    {
+        try{
+            Mouvement mouvement = new Mouvement();
+            mouvement.getsortiebyid(idmouvement,null);
+            mouvement.validationsortie(null);
+        }catch(Exceptionpersonnalise e){
+            Console.WriteLine(e.Message);
+        }
+        return View("Index");
+    }
+
+    public IActionResult versetatdestockformulaire()
+    {   
+        Magasin magasin = new Magasin();
+        ViewBag.listemagasin = magasin.getallmagasin(null);
+        return View("Etatdestockformulaire");
+    }
+
+    public IActionResult etatdestock(String dateinitial,String datefinal,String idarticle,String idmagasin)
+    {   
+        Magasin magasin = new Magasin();
+        magasin.getmagasinbyid(idmagasin,null);
+
+        List<Etatdestock> listeetatdestockinitial = magasin.getetatdestockbyidarticle(idarticle,dateinitial,null);
+        List<Etatdestock> listeetatdestockfinal = magasin.getetatdestockbyidarticle(idarticle,datefinal,null);
+        double montant = magasin.sommemontant(idarticle,datefinal,null);
+        ViewBag.listeetatdestockinitial = listeetatdestockinitial;
+        ViewBag.listeetatdestockfinal = listeetatdestockfinal;
+        ViewBag.montant = montant;
+        return View("Etatdestocktable");
     }
 
     public IActionResult Privacy()

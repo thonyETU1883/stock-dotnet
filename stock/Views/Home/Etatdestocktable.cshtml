@@ -1,0 +1,46 @@
+@{
+  List<Etatdestock> listeetatstockinitial = ViewBag.listeetatdestockinitial;
+  List<Etatdestock> listeetatstockfinal = ViewBag.listeetatdestockfinal;
+}
+
+      <div class="container mt-4">
+        <h1>Etat de Stock</h1>
+        <table class="table">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">date intial</th>
+                <th>Article</th>
+                <th>Magasin</th>
+                <th scope="col">quantite initial</th>
+
+                <th scope="col">date final</th>
+                <th scope="col">quantite final</th>
+                <th scope="col">prix unitaire final</th>
+                <th scope="col">Montant final</th>
+              </tr>
+            </thead>
+            <tbody>
+            @for(int i=0;i<listeetatstockinitial.Count;i++){  
+              Article article = new Article();
+              article.getArticleById(listeetatstockfinal[i].getIdarticle(),null);
+              Magasin magasin = new Magasin();
+              magasin.getmagasinbyid(listeetatstockfinal[i].getIdmagasin(),null);
+              <tr>
+                <th scope="row">@listeetatstockinitial[i].getDate()</th>
+                <td>@article.getNomarticle()</td>
+                <td>@magasin.getNommagasin()</td>
+                <td>@listeetatstockinitial[i].getQuantite()</td>
+
+
+                <th scope="row">@listeetatstockfinal[i].getDate()</th>
+                <td>@listeetatstockfinal[i].getQuantite()</td>
+                <td>@listeetatstockfinal[i].getPrixunitaire()</td>
+                <td>@listeetatstockfinal[i].getMontant()</td>
+              </tr>
+            }
+
+            </tbody>
+          </table>
+
+          somme :  @ViewBag.montant
+      </div>

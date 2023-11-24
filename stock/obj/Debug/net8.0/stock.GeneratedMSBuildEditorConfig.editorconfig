@@ -18,12 +18,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\ratah\c#\stock-dotnet\stock
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/ratah/c\#/stock-dotnet/stock/Views/Home/Etatdestockformulaire.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFdGF0ZGVzdG9ja2Zvcm11bGFpcmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ratah/c\#/stock-dotnet/stock/Views/Home/Etatdestocktable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFdGF0ZGVzdG9ja3RhYmxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/ratah/c\#/stock-dotnet/stock/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ratah/c\#/stock-dotnet/stock/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ratah/c\#/stock-dotnet/stock/Views/Home/Sortieformulaire.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTb3J0aWVmb3JtdWxhaXJlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ratah/c\#/stock-dotnet/stock/Views/Home/validationsortie.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVx2YWxpZGF0aW9uc29ydGllLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/ratah/c\#/stock-dotnet/stock/Views/Shared/Error.cshtml]

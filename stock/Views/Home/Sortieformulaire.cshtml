@@ -1,0 +1,38 @@
+@{
+    List<Magasin> listemagasin = ViewBag.listemagasin;
+}
+        <div class="row mt-4 justify-content-center align-items-center">
+            <form class="col-6" method="get" action="insertionsortie">
+                <h1>Insertion Sortie </h1>
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Date</label>
+                <input type="date" class="form-control" id="exampleInputEmail1" name="date">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Article</label>
+                    <input type="datetime" class="form-control" id="exampleInputEmail1" name="idarticle">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Quantite</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="quantite">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Prix unitaire</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="prixunitaire">
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Magasin</label>
+                    <select class="form-select" aria-label="Default select example" name="idmagasin">
+                        @foreach(Magasin m in listemagasin){
+                            <option value="3" value="@m.getIdmagasin()">@m.getNommagasin();</option>
+                        }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </form>
+        </div>

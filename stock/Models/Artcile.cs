@@ -38,9 +38,8 @@ class Article{
     public void setType(int type){
         this.Type = type;
     }
-
     public Etatdestock getetatdestockbydate(String date,String idmagasin,NpgsqlConnection liaisonbase){
-        String sql = "select * from etatdestock where date <= @date AND idarticle = @idarticle  AND idmagasin = @idmagasin LIMIT 1";
+        String sql = "select * from etatdestock where date <= @date AND idarticle = @idarticle  AND idmagasin = @idmagasin ORDER BY date DESC LIMIT 1 ";
         if(liaisonbase == null || liaisonbase.State == ConnectionState.Closed){
             Connexion connexion = new Connexion ();
             liaisonbase = connexion.createLiaisonBase();
@@ -62,6 +61,7 @@ class Article{
                 etatdestock.setQuantite(reader.GetDouble(2));
                 etatdestock.setIdarticle(reader.GetString(3));
                 etatdestock.setIdmagasin(reader.GetString(4));
+                etatdestock.setPrixunitaire(reader.GetDouble(5));
             }
         }catch(Exception e){
             Console.WriteLine(e.Message);
@@ -130,5 +130,35 @@ class Article{
             }
         }
         return mouvement;
+    }
+
+    public List<Article> getcategoriearticle(NpgsqlConnection liaisonbase){
+        String sql = "SELECT * FROM article WHERE idarticle LIKE @idarticle";
+        if(liaisonbase == null || liaisonbase.State == ConnectionState.Closed){
+            Connexion connexion = new Connexion ();
+            liaisonbase = connexion.createLiaisonBase();
+            liaisonbase.Open();
+        }
+        List<Article> listearticle =  new List<Article>();
+        try{
+            NpgsqlCommand cmd = new NpgsqlCommand(sql, liaisonbase);
+            cmd.Parameters.AddWithValue("@idarticle",this.getIdarticle()+"%");
+            NpgsqlDataReader reader = cmd.ExecuteReader();
+            while(reader.Read()){
+                Article article =  new Article();
+                article.setIdarticle(reader.GetString(0));
+                article.setNomarticle(reader.GetString(1));
+                article.setType(reader.GetInt32("type"));
+                listearticle.Add(article);
+                Console.WriteLine(reader.GetString(0));
+            }
+        }catch(Exception e){
+            Console.WriteLine(e.Message);
+        }finally{
+            if(liaisonbase != null){
+                liaisonbase.Close();
+            }
+        }
+        return listearticle;
     }
 }

@@ -1,0 +1,36 @@
+@{
+  List<Mouvement> listemouvement = ViewBag.listemouvement;
+}
+
+      <div class="container mt-4">
+        <h1>Validation sortie</h1>
+        <table class="table">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">date</th>
+                <th scope="col">quantite</th>
+                <th scope="col">article</th>
+                <th scope="col">magasin</th>
+                <th scope="col">prix unitaire</th>
+                <th scope="col">validation</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach(Mouvement m in listemouvement){
+                  Article article = new Article();
+                  article.getArticleById(m.getIdarticle(),null);
+                  Magasin magasin = new Magasin();
+                  magasin.getmagasinbyid(m.getIdmagasin(),null);
+                <tr>
+                  <td scope="row">@m.getDate()</td>
+                  <td>@m.getQuantite()</td>
+                  <td>@article.getNomarticle()</td>
+                  <td>@magasin.getNommagasin()</td>
+                  <td>@m.getPrixunitaire()</td>
+                  <td><a href="validation?idmouvement=@m.getIdmouvement()">Valider</a></td>
+                </tr>
+              }
+              
+            </tbody>
+          </table>
+      </div>

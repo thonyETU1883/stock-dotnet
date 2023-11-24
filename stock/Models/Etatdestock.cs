@@ -8,15 +8,17 @@ class Etatdestock{
     double Quantite;
     String Idarticle;
     String Idmagasin;
+    double Prixunitaire;
 
     public Etatdestock(){}
 
-    public Etatdestock(String idmouvement,DateTime date,double quantite,String idarticle,String idmagasin){
+    public Etatdestock(String idmouvement,DateTime date,double quantite,String idarticle,String idmagasin,double prixuniatre){
         this.Idmouvement = idmouvement;
         this.Date = date;
         this.Quantite = quantite;
         this.Idarticle = idarticle;
         this.Idmagasin = idmagasin;
+        this.Prixunitaire = prixuniatre;
     }
 
     public String getIdmouvement(){
@@ -57,5 +59,17 @@ class Etatdestock{
 
     public void setIdmagasin(String idmagasin){
         this.Idmagasin = idmagasin;
+    }
+
+    public double getPrixunitaire(){
+        return this.Prixunitaire;
+    }
+
+    public void setPrixunitaire(double prixunitaire){
+        this.Prixunitaire = prixunitaire;
+    }
+
+   public double getMontant(){
+        return this.getQuantite() * this.getPrixunitaire();
     }
 }
